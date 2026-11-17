@@ -5,6 +5,7 @@ import {
 } from "../controller/auth.controller.js";
 import {
   registerValidation,
+  loginValidation
 
 } from "../validations/auth.validation.js";
 
