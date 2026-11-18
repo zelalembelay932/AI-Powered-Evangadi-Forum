@@ -1,9 +1,3 @@
-/**
- * Landing: public marketing. Uses same tokens as Layout/Dashboard/Auth:
- * --surface, --background, --border, --radius-*, --text-*, --primary.
- * Width: --app-content-max for horizontal rhythm with `.layout__mainInner`.
- */
-
 .landing {
   min-height: 100vh;
   display: flex;
