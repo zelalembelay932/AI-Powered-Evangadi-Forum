@@ -45,8 +45,10 @@ apiClient.interceptors.response.use(
       localStorage.removeItem("token");
       localStorage.removeItem("user");
 
-      // Redirect to login page
-      window.location.href = "/auth";
+      // Tell AuthContext the session is gone. It resets React state and
+      // ProtectedRoute redirects to /auth (keeping the page the user was on),
+      // so there is no full page reload.
+      window.dispatchEvent(new Event("auth:expired"));
     }
     return Promise.reject(error);
   },
