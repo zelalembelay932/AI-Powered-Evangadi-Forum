@@ -24,3 +24,57 @@ const buildQuestionFilters = (filters) => {
     params,
   };
 };
+
+export const getQuestionsService = async (filters) => {
+  const normalizedLimit = 100; // Fixed max 100 records
+  const sortColumn = "q.created_at";
+  const normalizedSortOrder = "DESC";
+
+  const { whereClause, params } = buildQuestionFilters(filters);
+
+  const listSql = `
+    SELECT
+      q.question_id AS id,
+      q.question_hash AS questionHash,
+      q.title,
+      q.content,
+      q.created_at AS createdAt,
+      q.updated_at AS updatedAt,
+      u.user_id AS userId,
+      u.first_name AS firstName,
+      u.last_name AS lastName,
+      COUNT(DISTINCT a.answer_id) AS answerCount
+    FROM questions q
+    JOIN users u ON q.user_id = u.user_id
+    LEFT JOIN answers a ON a.question_id = q.question_id
+    ${whereClause}
+    GROUP BY q.question_id, u.user_id
+    ORDER BY ${sortColumn} ${normalizedSortOrder}
+    LIMIT ${normalizedLimit}
+  `;
+  const rows = await safeExecute(listSql, params);
+
+  return {
+    data: rows.map((question) => ({
+      id: question.id,
+      questionHash: question.questionHash,
+      title: question.title,
+      content: question.content,
+      answerCount: question.answerCount,
+      createdAt: question.createdAt,
+      updatedAt: question.updatedAt,
+      author: {
+        id: question.userId,
+        firstName: question.firstName,
+        lastName: question.lastName,
+      },
+    })),
+
+    meta: {
+      limit: normalizedLimit,
+      total: rows.length,
+      sortBy: "newest",
+      sortOrder: normalizedSortOrder,
+    },
+  };
+};
