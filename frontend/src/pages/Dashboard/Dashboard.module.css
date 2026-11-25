@@ -1,0 +1,233 @@
+.page {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(120deg, var(--surface), var(--primary-light));
+}
+
+.eyebrow {
+  margin-bottom: 0.4rem;
+  color: var(--primary-dark);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  font-size: clamp(var(--text-xl), 3vw, var(--text-3xl));
+}
+
+.subtitle {
+  margin-top: 0.45rem;
+  color: var(--text-tertiary);
+  font-size: var(--text-sm);
+}
+
+.askButton,
+.searchButton {
+  display: inline-flex;
+  min-height: 2.7rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-md);
+  color: var(--text-inverse);
+  background: var(--primary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  white-space: nowrap;
+}
+
+.askButton:hover,
+.searchButton:hover {
+  color: var(--text-inverse);
+  background: var(--primary-hover);
+}
+
+.askButton span {
+  font-size: var(--text-lg);
+  line-height: 1;
+}
+
+.feed {
+  display: grid;
+  gap: 1rem;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.search input,
+.mode select {
+  min-height: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  background: var(--surface);
+  font: inherit;
+}
+
+.search input {
+  min-width: 10rem;
+  flex: 1;
+  padding: 0.55rem 0.75rem;
+}
+
+.mode {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-tertiary);
+  font-size: var(--text-xs);
+}
+
+.mode select {
+  padding: 0.45rem 0.6rem;
+  font-size: var(--text-sm);
+}
+
+.questionList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.question {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1.2rem 1.35rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.question:hover {
+  transform: translateY(-1px);
+  border-color: var(--primary);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.question h3 {
+  font-size: var(--text-lg);
+}
+
+.question__content {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.question__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-top: 0.25rem;
+  color: var(--text-tertiary);
+  font-size: var(--text-xs);
+}
+
+.question__meta > span:nth-child(2) {
+  color: var(--primary-dark);
+  font-weight: var(--font-medium);
+}
+
+.state,
+.error,
+.empty {
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  text-align: center;
+}
+
+.state {
+  color: var(--text-tertiary);
+}
+
+.error {
+  color: #991b1b;
+  background: var(--error-light);
+}
+
+.empty {
+  border: 1px dashed var(--border-hover);
+}
+
+.empty h3 {
+  font-size: var(--text-lg);
+}
+
+.empty p {
+  margin: 0.45rem 0 0.8rem;
+  color: var(--text-tertiary);
+  font-size: var(--text-sm);
+}
+
+.empty a {
+  color: var(--primary-dark);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .search {
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .search input {
+    flex-basis: 100%;
+  }
+
+  .mode {
+    flex: 1;
+  }
+
+  .mode select {
+    flex: 1;
+  }
+}
