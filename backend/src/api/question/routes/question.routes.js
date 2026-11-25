@@ -2,12 +2,14 @@ import express from "express";
 
 // Controllers
 import {
-  getQuestionsController
+  getQuestionsController,
+  getSingleQuestionController
 } from "../controller/question.controller.js";
 
 // Validations
 import {
-  getQuestionsValidation
+  getQuestionsValidation,
+  getSingleQuestionValidation
 } from "../validations/question.validation.js";
 
 // Middleware
@@ -20,6 +22,13 @@ router.get(
   authenticateUser,
   getQuestionsValidation,
   getQuestionsController,
+);
+
+router.get(
+  "/:questionHash",
+  authenticateUser,
+  getSingleQuestionValidation,
+  getSingleQuestionController,
 );
 
 export default router;
