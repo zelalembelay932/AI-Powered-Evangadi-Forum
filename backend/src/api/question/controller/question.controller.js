@@ -4,6 +4,37 @@ import {
   getSingleQuestionService,
 } from "../service/question.service.js";
 
+
+
+
+
+export const createQuestionController = async (req, res, next) => {
+  // An Express handler that can await asynchronous service/database work.
+  // req  =>	Information coming from the client
+  // res =>	How to send the response
+  // next =>	How to continue middleware processing or handle errors
+  try {
+    const { title, content } = req.body;
+    // Destructures the JSON request body fields
+    const result = await createQuestionWithVectorService({
+      // This calls the function you imported from question.service.js.
+      // Its job is to create a question and generate the vector embedding.
+      userId: req.user.id, // author id (authenticated user)
+      // our backend authentication middleware verifies the JWT token and attaches the decoded user's information
+      title,
+      content,
+    });
+
+    res.status(StatusCodes.CREATED).json({
+      success: true,
+      message: "Question posted successfully.",
+      data: result.question,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const getQuestionsController = async (req, res, next) => {
   try {
     const filters = {
@@ -45,3 +76,4 @@ export const assessAnswerAgainstQuestionController = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+}
