@@ -1,6 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { safeExecute } from "../../../../db/config.js";
-import { ServiceUnavailableError } from "../../../utils/errors/index.js";
+// import { ServiceUnavailableError } from "../../../utils/errors/index.js";
 
 const GEMINI_EMBEDDING_MODEL =
   process.env.GEMINI_EMBEDDING_MODEL || "gemini-embedding-2";
