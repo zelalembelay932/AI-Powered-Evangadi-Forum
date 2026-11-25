@@ -16,3 +16,13 @@ export const getQuestionsValidation = [
 
   validationErrorHandler,
 ];
+
+export const getSingleQuestionValidation = [
+  param("questionHash")
+    .isString()
+    .withMessage("Question hash is required")
+    .matches(/^[a-f0-9]{16}$/)
+    .withMessage("Question hash must be a 16-character lowercase hex string"),
+
+  validationErrorHandler,
+];
