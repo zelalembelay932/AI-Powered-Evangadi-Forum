@@ -1,7 +1,20 @@
 import express from "express";
-import authRoutes from "./auth/routes/auth.routes.js";
+import {
+  registerController,
+  loginController,
+} from "../controller/auth.controller.js";
+import {
+  registerValidation,
+  loginValidation
 
-export const mainRouter = express.Router();
+} from "../validations/auth.validation.js";
 
-// Authentication routes
-mainRouter.use("/auth", authRoutes);
+const router = express.Router();
+
+router.post("/register", registerValidation, registerController);
+router.post("/login", loginValidation, loginController);
+
+
+
+
+export default router;
