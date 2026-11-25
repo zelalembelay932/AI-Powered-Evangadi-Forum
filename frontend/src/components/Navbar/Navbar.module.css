@@ -1,0 +1,90 @@
+.navbar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 5.25rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem clamp(1rem, 3vw, 2rem);
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+}
+
+.navbar__heading {
+  min-width: 0;
+}
+
+.navbar__heading h1 {
+  font-size: var(--text-xl);
+}
+
+.navbar__heading p {
+  overflow: hidden;
+  max-width: 58rem;
+  margin-top: 0.2rem;
+  color: var(--text-tertiary);
+  font-size: var(--text-xs);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.navbar__user {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.avatar {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border-radius: var(--radius-full);
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+}
+
+.navbar__name {
+  max-width: 10rem;
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.logout {
+  min-height: 2.2rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  background: var(--surface);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+}
+
+.logout:hover {
+  border-color: var(--primary);
+  color: var(--primary-dark);
+  background: var(--primary-light);
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    min-height: 4.5rem;
+  }
+
+  .navbar__user {
+    gap: 0.4rem;
+  }
+
+  .navbar__name {
+    display: none;
+  }
+}
