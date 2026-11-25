@@ -24,20 +24,24 @@ export const getQuestionsController = async (req, res, next) => {
   }
 };
 
-export const getSingleQuestionController = async (req, res, next) => {
+/**
+ * Handles AI relevance assessment of an answer draft against a question.
+ */
+export const assessAnswerAgainstQuestionController = async (req, res, next) => {
   try {
     const { questionHash } = req.params;
-
-    const result = await getSingleQuestionService({
-      questionHash,
+    const { answerText } = req.body;
+    const { question } = await getSingleQuestionService({ questionHash });
+    const data = await assessAnswerAgainstQuestionService({
+      questionTitle: question.title,
+      questionContent: question.content,
+      answerText,
     });
-
     res.status(StatusCodes.OK).json({
       success: true,
-      message: "Question fetched successfully.",
-      ...result,
+      message: 'Answer fit assessed.',
+      data,
     });
   } catch (error) {
     next(error);
   }
-};
