@@ -1,6 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import {
-  getQuestionsService
+  getQuestionsService,
+  getSingleQuestionService,
 } from "../service/question.service.js";
 
 export const getQuestionsController = async (req, res, next) => {
@@ -23,3 +24,20 @@ export const getQuestionsController = async (req, res, next) => {
   }
 };
 
+export const getSingleQuestionController = async (req, res, next) => {
+  try {
+    const { questionHash } = req.params;
+
+    const result = await getSingleQuestionService({
+      questionHash,
+    });
+
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Question fetched successfully.",
+      ...result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
